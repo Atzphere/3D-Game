@@ -35,6 +35,7 @@ public class SmoothMouseLook : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("Original Rot: " + transform.localRotation.ToString());
         if (axes == RotationAxes.MouseXAndY)
         {
             rotAverageY = 0f;
@@ -121,6 +122,7 @@ public class SmoothMouseLook : MonoBehaviour
             Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
             transform.localRotation = originalRotation * yQuaternion;
         }
+        Debug.Log("New Rot: " + transform.localRotation.ToString());
     }
 
     void Start()
