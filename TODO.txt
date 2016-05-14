@@ -1,0 +1,21 @@
+TODO:
+    Session May14th: 
+        Gather setup Version info
+        Interactive Components
+
+    Graham:
+        Fix Camera Rotation Follow
+        Launcher & UI
+        Countdown Timer
+        Lighting Prep
+
+    Session Midweek:
+        Lighting
+
+    Graham:
+        Effects Prep
+
+    Session Weekend:
+        Effects, and conclusion
+
+
