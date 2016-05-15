@@ -8,6 +8,8 @@ using System.Collections.Generic;
 [AddComponentMenu("Camera-Control/Smooth Mouse Look")]
 public class SmoothMouseLook : MonoBehaviour
 {
+    public TextAsset image;
+
 
     public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
     public RotationAxes axes = RotationAxes.MouseXAndY;
@@ -35,7 +37,7 @@ public class SmoothMouseLook : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Original Rot: " + transform.localRotation.ToString());
+        //Debug.Log("Original Rot: " + transform.localRotation.ToString());
         if (axes == RotationAxes.MouseXAndY)
         {
             rotAverageY = 0f;
@@ -122,11 +124,18 @@ public class SmoothMouseLook : MonoBehaviour
             Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
             transform.localRotation = originalRotation * yQuaternion;
         }
-        Debug.Log("New Rot: " + transform.localRotation.ToString());
+        //Debug.Log("New Rot: " + transform.localRotation.ToString());
     }
 
     void Start()
     {
+        Texture2D tex = new Texture2D(2, 2);
+        tex.LoadImage(image.bytes);
+        Vector2 hotspot = new Vector2(1, 1);
+        Cursor.SetCursor(tex, hotspot, CursorMode.Auto);
+        Cursor.visible = true;
+
+        //Cursor.lockState = CursorLockMode.Locked;
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb)
             rb.freezeRotation = true;
