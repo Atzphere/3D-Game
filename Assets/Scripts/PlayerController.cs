@@ -51,8 +51,19 @@ public class PlayerController : MonoBehaviour
 
                             if (Input.GetKeyDown(KeyCode.E))
                             {
-                                DoorRotate rotator = (DoorRotate) frontdoor.AddComponent<DoorRotate>();
-                                rotator.finalDegree = 90;
+                                DoorRotate rotator = (DoorRotate) rayobject.GetComponent<DoorRotate>();
+                                if (rotator == null)
+                                {
+                                    rotator = (DoorRotate) rayobject.AddComponent<DoorRotate>();
+                                    rotator.finalDegree = 90;
+                                }
+
+                                else 
+                                {
+                                    rotator.ChangeDirection();
+
+                                }
+
                             }
                         break;
                         }
