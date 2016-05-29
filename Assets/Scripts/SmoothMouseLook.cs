@@ -135,7 +135,7 @@ public class SmoothMouseLook : MonoBehaviour
         Cursor.SetCursor(tex, hotspot, CursorMode.Auto);
         Cursor.visible = true;
 
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb)
             rb.freezeRotation = true;

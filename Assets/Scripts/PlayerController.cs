@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+//imported stuff
 public class PlayerController : MonoBehaviour
 {
-
+    //all variables used by the code
     public float speed;
     public GameObject camera;
     public GameObject frontdoor;
@@ -36,8 +36,7 @@ public class PlayerController : MonoBehaviour
         time,
         enemy
     }
-
-
+    //initialisation of certain variables, eg. the timer
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -56,8 +55,7 @@ public class PlayerController : MonoBehaviour
             DetermineResult();
         }
     }
-
-
+    //detects what the player is looking at, and does stuff based on that. Happens once every game update
     void Update()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -69,7 +67,6 @@ public class PlayerController : MonoBehaviour
             if (rayobject.CompareTag(INTERACTABLE_TAG))
             {
 
-                //print("Is Interactable");
                 switch (rayobject.name)
                 {
                     case "test1":
@@ -86,7 +83,6 @@ public class PlayerController : MonoBehaviour
                                 DoorRotate rotator = (DoorRotate)lockedDoor1.AddComponent<DoorRotate>();
                                 rotator.finalDegree = 90;
                                 playerText.text = "What was that noise?";
-
                             }
 
                             break;
@@ -108,9 +104,7 @@ public class PlayerController : MonoBehaviour
                                 }
                             }
 
-
                             break;
-
                         }
                     case "button3":
                         {
@@ -144,7 +138,6 @@ public class PlayerController : MonoBehaviour
                             }
 
                             break;
-
                         }
                     case "FrontDoor":
                         {
@@ -161,7 +154,6 @@ public class PlayerController : MonoBehaviour
                                 else 
                                 {
                                     rotator.ChangeDirection();
-
                                 }
 
                             }
@@ -180,13 +172,13 @@ public class PlayerController : MonoBehaviour
 
     void LateUpdate()
     {
-    if (!gameDone)
-    {
-        PlayerMovement();
-    }
+        if (!gameDone)
+        {
+            PlayerMovement();
+        }
 
     }
-
+    //timer function for the screen
     private void UpdateTime ()
     {
         int prettyTime = 0;
@@ -199,8 +191,8 @@ public class PlayerController : MonoBehaviour
         }
         timeRemainingText.text = "Time Remaining: " + prettyTime.ToString();
     }
-
-        private void DetermineResult ()
+    //determines the result of the game using hasWon(), and hasLost()
+    private void DetermineResult ()
     {
         if (hasWon())
         {
@@ -232,12 +224,12 @@ public class PlayerController : MonoBehaviour
             gameDone = true;
         }
     }
-
+    //returns whether or not the player has won or not
     private bool hasWon()
     {
         return buttonStatus[4];
-    }
-
+    }  
+    //returns whether or not the player has lost, based on things such as dying from an enemy, and falling out of the world
     private bool hasLost()
     {
         bool hasLost = false;
@@ -259,7 +251,7 @@ public class PlayerController : MonoBehaviour
         }
         return hasLost;
     }
-
+    //controls player movement
     private void PlayerMovement()
     {
         float moveHoriz = Input.GetAxis("Horizontal");
@@ -269,7 +261,7 @@ public class PlayerController : MonoBehaviour
         float step = lookSpeed * Time.deltaTime;
         camera.transform.rotation = rb.transform.rotation;
     }
-
+    //controls the order of the buttons used to progress the game
     private void SetButton(int buttonIndex)
     {
         if (buttonIndex == 0 || buttonStatus[buttonIndex - 1])
@@ -278,11 +270,4 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
-
-
-    }
-
-// http://docs.unity3d.com/ScriptReference/Physics.Raycast.html
-// http://docs.unity3d.com/ScriptReference/Camera.ScreenToWorldPoint.html
+}
